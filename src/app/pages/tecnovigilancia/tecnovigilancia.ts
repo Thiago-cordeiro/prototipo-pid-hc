@@ -1,5 +1,6 @@
 import { Component, HostListener, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 interface TecnovigilanciaRecord {
   codigo: string;
@@ -55,7 +56,7 @@ const RECORDS: readonly TecnovigilanciaRecord[] = [
 
 @Component({
   selector: 'app-tecnovigilancia',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './tecnovigilancia.html',
   styleUrl: './tecnovigilancia.sass',
 })
