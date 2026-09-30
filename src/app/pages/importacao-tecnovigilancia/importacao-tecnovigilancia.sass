@@ -1,0 +1,369 @@
+:host
+  display: block
+  min-height: calc(100dvh - 48px)
+
+.import-header
+  display: flex
+  align-items: center
+  height: 76px
+  margin: -24px -24px 0
+  padding: 0 24px
+  background-color: #f4f5f8
+  border-bottom: 1px solid #e4e7ec
+
+.import-header__heading
+  display: flex
+  align-items: baseline
+  gap: 8px
+  min-width: 0
+
+  h1,
+  p
+    margin: 0
+
+  h1
+    color: #1d2939
+    font-size: 20px
+    font-weight: 600
+
+  span,
+  p
+    color: #667085
+    font-size: 14px
+
+.import-content
+  display: grid
+  place-items: center
+  min-height: calc(100dvh - 124px)
+  padding: 48px 24px 72px
+
+.import-panel
+  width: min(680px, 100%)
+  padding: 32px
+  background-color: #fff
+  border: 1px solid #e4e7ec
+  border-radius: 14px
+  box-shadow: 0 4px 14px rgb(16 24 40 / 5%)
+
+.import-panel__intro
+  margin-bottom: 24px
+  text-align: center
+
+  h2,
+  p
+    margin: 0
+
+  h2
+    margin-top: 5px
+    color: #1d2939
+    font-size: 24px
+    font-weight: 600
+
+  p
+    margin-top: 6px
+    color: #667085
+    font-size: 13px
+
+.import-panel__eyebrow
+  color: #3346c4
+  font-size: 11px
+  font-weight: 600
+  letter-spacing: .09em
+  text-transform: uppercase
+
+.drop-zone
+  display: flex
+  min-height: 250px
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  gap: 16px
+  padding: 32px
+  text-align: center
+  background-color: #fbfcfe
+  border: 1.5px dashed #cbd1dc
+  border-radius: 12px
+  transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease
+
+  &--active
+    background-color: #f2f4ff
+    border-color: #6674d8
+    box-shadow: 0 0 0 4px rgb(51 70 196 / 9%)
+
+  &--filled
+    min-height: 150px
+    padding: 24px
+    background-color: #f8f9ff
+    border-style: solid
+    border-color: #c7cdf5
+
+.drop-zone__icon
+  display: grid
+  place-items: center
+  width: 58px
+  height: 58px
+  color: #3346c4
+  background-color: #eef0ff
+  border: 1px solid #dfe3ff
+  border-radius: 12px
+  box-shadow: 0 1px 3px rgb(16 24 40 / 8%)
+
+  svg
+    width: 25px
+    height: 25px
+    fill: none
+    stroke: currentColor
+    stroke-linecap: round
+    stroke-linejoin: round
+    stroke-width: 1.7
+
+.drop-zone__copy
+  display: flex
+  flex-direction: column
+  gap: 4px
+
+  strong
+    color: #1d2939
+    font-size: 14px
+    font-weight: 600
+
+  span
+    color: #667085
+    font-size: 12px
+
+.drop-zone__select
+  min-height: 36px
+  padding: 0 13px
+  color: #344054
+  background-color: #fff
+  border: 1px solid #d0d5dd
+  border-radius: 8px
+  box-shadow: 0 1px 2px rgb(16 24 40 / 5%)
+  font-size: 12px
+  font-weight: 600
+  cursor: pointer
+
+  &:hover,
+  &:focus-visible
+    color: #1e2d9b
+    background-color: #f2f4ff
+    border-color: #aeb6ec
+
+.selected-file
+  display: flex
+  align-items: center
+  gap: 14px
+  width: 100%
+  text-align: left
+
+.selected-file__icon
+  display: grid
+  flex: 0 0 46px
+  place-items: center
+  width: 46px
+  height: 46px
+  color: #3346c4
+  background-color: #e7eaff
+  border-radius: 10px
+
+  svg
+    width: 23px
+    height: 23px
+    fill: none
+    stroke: currentColor
+    stroke-linecap: round
+    stroke-linejoin: round
+    stroke-width: 1.6
+
+.selected-file__data
+  display: flex
+  min-width: 0
+  flex: 1
+  flex-direction: column
+  gap: 3px
+
+  strong,
+  span
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  strong
+    color: #1d2939
+    font-size: 14px
+    font-weight: 600
+
+  span
+    color: #667085
+    font-size: 12px
+
+.selected-file__remove
+  display: grid
+  flex: 0 0 36px
+  place-items: center
+  width: 36px
+  height: 36px
+  padding: 0
+  color: #667085
+  background-color: transparent
+  border: 0
+  border-radius: 8px
+  cursor: pointer
+
+  &:hover:not(:disabled),
+  &:focus-visible:not(:disabled)
+    color: #b42318
+    background-color: #fef3f2
+
+  &:disabled
+    opacity: .5
+    cursor: not-allowed
+
+  svg
+    width: 18px
+    height: 18px
+    fill: none
+    stroke: currentColor
+    stroke-linecap: round
+    stroke-width: 1.7
+
+.import-panel__meta
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 12px
+  margin-top: 11px
+  color: #667085
+  font-size: 11px
+
+  span
+    display: inline-flex
+    align-items: center
+    gap: 5px
+
+  svg
+    width: 14px
+    height: 14px
+    fill: none
+    stroke: currentColor
+    stroke-linecap: round
+    stroke-linejoin: round
+    stroke-width: 1.7
+
+.import-panel__actions
+  display: flex
+  justify-content: flex-end
+  margin-top: 24px
+
+.import-panel__submit
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  gap: 7px
+  min-width: 166px
+  min-height: 40px
+  padding: 0 15px
+  color: #fff
+  background-color: #3346c4
+  border: 1px solid #3346c4
+  border-radius: 8px
+  box-shadow: 0 1px 2px rgb(16 24 40 / 8%)
+  font-size: 13px
+  font-weight: 600
+  cursor: pointer
+
+  &:hover:not(:disabled),
+  &:focus-visible:not(:disabled)
+    background-color: #1e2d9b
+    border-color: #1e2d9b
+
+  &:disabled
+    color: #98a2b3
+    background-color: #f2f4f7
+    border-color: #e4e7ec
+    box-shadow: none
+    cursor: not-allowed
+
+  svg
+    width: 17px
+    height: 17px
+    fill: none
+    stroke: currentColor
+    stroke-linecap: round
+    stroke-linejoin: round
+    stroke-width: 1.8
+
+.import-panel__spinner
+  width: 16px
+  height: 16px
+  border: 2px solid rgb(255 255 255 / 42%)
+  border-top-color: #fff
+  border-radius: 50%
+  animation: import-spin .7s linear infinite
+
+@keyframes import-spin
+  to
+    transform: rotate(360deg)
+
+@media (max-width: 575.98px)
+  :host
+    min-height: calc(100dvh - 104px)
+
+  .import-header
+    height: auto
+    min-height: 76px
+    margin: -20px -16px 0
+    padding: 13px 16px
+
+  .import-header__heading
+    flex-direction: column
+    align-items: flex-start
+    gap: 1px
+
+    h1
+      font-size: 18px
+
+    span
+      display: none
+
+    p
+      font-size: 12px
+
+  .import-content
+    min-height: auto
+    padding: 28px 0 44px
+
+  .import-panel
+    padding: 22px 16px
+    border-radius: 12px
+
+  .import-panel__intro
+    margin-bottom: 20px
+
+    h2
+      font-size: 21px
+
+  .drop-zone
+    min-height: 230px
+    padding: 24px 16px
+
+    &--filled
+      min-height: 132px
+
+  .import-panel__meta
+    align-items: flex-start
+    flex-direction: column
+    gap: 4px
+
+  .import-panel__actions
+    margin-top: 20px
+
+  .import-panel__submit
+    width: 100%
+
+@media (prefers-reduced-motion: reduce)
+  .drop-zone
+    transition: none
+
+  .import-panel__spinner
+    animation: none

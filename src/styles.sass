@@ -1,1 +1,537 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap')
+
+*
+  box-sizing: border-box
+
+html
+  width: 100%
+  min-width: 0
+  min-height: 100%
+  max-width: 100%
+  overflow-x: hidden
+
+body
+  width: 100%
+  min-width: 0
+  max-width: 100%
+  min-height: 100dvh
+  margin: 0
+  overflow-x: hidden
+  color: #181018
+  background-color: #f4f5f8
+  font-family: 'Poppins', sans-serif
+
+app-root
+  display: block
+  width: 100%
+  min-width: 0
+  max-width: 100%
+
+button,
+input,
+textarea,
+select
+  font: inherit
+
+h1,
+h2,
+h3,
+p
+  margin-top: 0
+
+h1,
+h2,
+h3
+  font-family: 'Outfit', sans-serif
+
+.visually-hidden
+  position: absolute
+  width: 1px
+  height: 1px
+  padding: 0
+  margin: -1px
+  overflow: hidden
+  clip: rect(0, 0, 0, 0)
+  white-space: nowrap
+  border: 0
+
+.import-feedback
+  display: flex
+  align-items: center
+  gap: 9px
+  margin-bottom: 16px
+  padding: 10px 12px
+  border: 1px solid
+  border-radius: 8px
+  font-size: 13px
+
+  svg
+    flex: 0 0 18px
+    width: 18px
+    height: 18px
+    fill: none
+    stroke: currentColor
+    stroke-linecap: round
+    stroke-linejoin: round
+    stroke-width: 1.8
+
+  span
+    flex: 1
+
+  button
+    display: grid
+    place-items: center
+    width: 26px
+    height: 26px
+    padding: 0
+    color: inherit
+    background: transparent
+    border: 0
+    border-radius: 5px
+    font-size: 20px
+    cursor: pointer
+
+  &--success
+    color: #067647
+    background-color: #ecfdf3
+    border-color: #abefc6
+
+  &--error
+    color: #b42318
+    background-color: #fef3f2
+    border-color: #fecdca
+
+// Shared lateral filters used by the listing pages.
+.filter-backdrop
+  position: fixed
+  inset: 0
+  z-index: 50
+  width: 100%
+  height: 100%
+  padding: 0
+  background-color: rgb(16 24 40 / 38%)
+  border: 0
+  opacity: 0
+  visibility: hidden
+  cursor: pointer
+  transition: opacity 200ms ease, visibility 200ms
+
+  &--visible
+    opacity: 1
+    visibility: visible
+
+.filters-panel
+  position: fixed
+  inset: 0 0 0 auto
+  z-index: 60
+  display: none
+  flex-direction: column
+  width: min(380px, 100vw)
+  height: 100dvh
+  color: #101828
+  background-color: #fff
+  border-left: 1px solid #e4e7ec
+  box-shadow: -12px 0 30px rgb(16 24 40 / 12%)
+  transform: translateX(100%)
+  visibility: hidden
+  transition: transform 220ms ease, visibility 220ms
+
+  &--open
+    display: flex
+    transform: translateX(0)
+    visibility: visible
+
+.filters-panel__header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  height: 76px
+  padding: 0 20px
+  border-bottom: 1px solid #e4e7ec
+
+  h2,
+  p
+    margin: 0
+
+  h2
+    font-size: 20px
+    font-weight: 600
+
+  p
+    margin-top: 2px
+    color: #667085
+    font-size: 12px
+
+  button
+    display: grid
+    place-items: center
+    width: 36px
+    height: 36px
+    padding: 0
+    color: #475467
+    background-color: transparent
+    border: 0
+    border-radius: 8px
+    font-size: 26px
+    cursor: pointer
+
+    &:hover,
+    &:focus-visible
+      color: #1e2d9b
+      background-color: #f2f4ff
+
+.filters-panel__form
+  display: flex
+  flex: 1
+  flex-direction: column
+  gap: 20px
+  padding: 24px 20px 20px
+
+  label
+    display: flex
+    flex-direction: column
+    gap: 7px
+
+    span
+      color: #344054
+      font-size: 13px
+      font-weight: 600
+
+  select
+    width: 100%
+    height: 42px
+    padding: 0 38px 0 12px
+    color: #344054
+    background-color: #fff
+    border: 1px solid #d0d5dd
+    border-radius: 8px
+    outline: none
+
+    &:focus
+      border-color: #6674d8
+      box-shadow: 0 0 0 3px rgb(51 70 196 / 12%)
+
+.filters-panel__footer
+  display: flex
+  gap: 10px
+  margin-top: auto
+
+  button
+    flex: 1
+    min-height: 42px
+    border-radius: 8px
+    font-size: 14px
+    font-weight: 600
+    cursor: pointer
+
+.filters-panel__clear
+  color: #475467
+  background-color: #fff
+  border: 1px solid #d0d5dd
+
+.filters-panel__apply
+  color: #fff
+  background-color: #3346c4
+  border: 1px solid #3346c4
+
+  &:hover,
+  &:focus-visible
+    background-color: #1e2d9b
+    border-color: #1e2d9b
+
+@media (max-width: 575.98px)
+  .filters-panel
+    width: 100vw
+
+@media (prefers-reduced-motion: reduce)
+  .filter-backdrop,
+  .filters-panel
+    transition: none
+
+.materials-feedback
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 16px
+  margin-bottom: 16px
+  padding: 10px 12px
+  border: 1px solid
+  border-radius: 8px
+  font-size: 13px
+
+  button
+    padding: 4px 8px
+    color: inherit
+    background: transparent
+    border: 0
+    border-radius: 5px
+    font-weight: 600
+    cursor: pointer
+
+  &--error
+    color: #b42318
+    background-color: #fef3f2
+    border-color: #fecdca
+
+  &--success
+    color: #067647
+    background-color: #ecfdf3
+    border-color: #abefc6
+
+.material-modal-layer
+  position: fixed
+  inset: 0
+  z-index: 80
+  display: grid
+  place-items: center
+  padding: 20px
+  overflow-y: auto
+
+  &--delete
+    z-index: 90
+
+.material-modal-backdrop
+  position: absolute
+  inset: 0
+  width: 100%
+  height: 100%
+  padding: 0
+  background-color: rgb(16 24 40 / 52%)
+  border: 0
+  cursor: pointer
+
+.material-modal
+  position: relative
+  z-index: 1
+  display: flex
+  flex-direction: column
+  width: min(680px, 100%)
+  max-height: calc(100dvh - 40px)
+  overflow: hidden
+  color: #101828
+  background-color: #fff
+  border: 1px solid #e4e7ec
+  border-radius: 14px
+  box-shadow: 0 24px 56px rgb(16 24 40 / 24%)
+  animation: material-modal-enter 180ms ease-out
+
+  &--delete
+    width: min(440px, 100%)
+
+.material-modal__header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  min-height: 76px
+  padding: 14px 20px
+  border-bottom: 1px solid #e4e7ec
+
+  h2,
+  p
+    margin: 0
+
+  h2
+    font-size: 20px
+    font-weight: 600
+
+  p
+    margin-top: 2px
+    color: #667085
+    font-size: 12px
+
+  button
+    display: grid
+    place-items: center
+    width: 36px
+    height: 36px
+    padding: 0
+    color: #475467
+    background: transparent
+    border: 0
+    border-radius: 8px
+    font-size: 26px
+    cursor: pointer
+
+    &:hover,
+    &:focus-visible
+      color: #1e2d9b
+      background-color: #f2f4ff
+
+.material-modal__form
+  display: flex
+  flex: 1
+  flex-direction: column
+  min-height: 0
+  overflow-y: auto
+
+.material-modal__grid
+  display: grid
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 18px 14px
+  padding: 24px 20px
+
+  label
+    display: flex
+    flex-direction: column
+    gap: 7px
+
+    span
+      color: #344054
+      font-size: 13px
+      font-weight: 600
+
+    em
+      color: #d92d20
+      font-style: normal
+
+  input,
+  select,
+  textarea
+    width: 100%
+    padding: 9px 11px
+    color: #344054
+    background-color: #fff
+    border: 1px solid #d0d5dd
+    border-radius: 8px
+    outline: none
+
+    &:focus
+      border-color: #6674d8
+      box-shadow: 0 0 0 3px rgb(51 70 196 / 12%)
+
+  input,
+  select
+    height: 42px
+
+  textarea
+    resize: vertical
+
+.material-modal__error
+  padding: 10px 12px
+  color: #b42318
+  background-color: #fef3f2
+  border: 1px solid #fecdca
+  border-radius: 8px
+  font-size: 13px
+
+.material-modal__wide
+  grid-column: 1 / -1
+
+.material-modal__delete-content
+  display: flex
+  align-items: flex-start
+  gap: 14px
+  padding: 24px 20px
+
+  p
+    margin: 1px 0 0
+    color: #475467
+    font-size: 14px
+    line-height: 1.55
+
+  strong
+    color: #1d2939
+
+.material-modal__warning-icon
+  display: grid
+  flex: 0 0 38px
+  place-items: center
+  width: 38px
+  height: 38px
+  color: #b42318
+  background-color: #fef3f2
+  border: 1px solid #fecdca
+  border-radius: 50%
+  font-size: 20px
+  font-weight: 600
+
+.material-modal__footer
+  display: flex
+  justify-content: flex-end
+  gap: 10px
+  margin-top: auto
+  padding: 16px 20px
+  border-top: 1px solid #e4e7ec
+
+  button
+    min-height: 40px
+    padding: 0 14px
+    border-radius: 8px
+    font-size: 13px
+    font-weight: 600
+    cursor: pointer
+
+    &:disabled
+      opacity: .55
+      cursor: not-allowed
+
+.material-modal__cancel
+  color: #475467
+  background-color: #fff
+  border: 1px solid #d0d5dd
+
+.material-modal__save
+  color: #fff
+  background-color: #3346c4
+  border: 1px solid #3346c4
+
+  &:hover:not(:disabled),
+  &:focus-visible:not(:disabled)
+    background-color: #1e2d9b
+    border-color: #1e2d9b
+
+.material-modal__delete
+  color: #fff
+  background-color: #d92d20
+  border: 1px solid #d92d20
+
+  &:hover:not(:disabled),
+  &:focus-visible:not(:disabled)
+    background-color: #b42318
+    border-color: #b42318
+
+@keyframes material-modal-enter
+  from
+    opacity: 0
+    transform: translateY(10px) scale(.98)
+
+  to
+    opacity: 1
+    transform: translateY(0) scale(1)
+
+@media (max-width: 575.98px)
+  .material-modal-layer
+    align-items: end
+    padding: 12px
+
+  .material-modal
+    width: 100%
+    max-height: calc(100dvh - 24px)
+    border-radius: 12px
+
+  .material-modal__grid
+    grid-template-columns: 1fr
+    gap: 14px
+    padding: 18px 16px
+
+  .material-modal__wide
+    grid-column: auto
+
+  .material-modal__header,
+  .material-modal__footer
+    padding-right: 16px
+    padding-left: 16px
+
+@media (max-width: 359.98px)
+  .material-modal__footer
+    display: grid
+    grid-template-columns: 1fr 1fr
+
+    button
+      width: 100%
+      padding-right: 8px
+      padding-left: 8px
+
+@media (prefers-reduced-motion: reduce)
+  .material-modal
+    animation: none

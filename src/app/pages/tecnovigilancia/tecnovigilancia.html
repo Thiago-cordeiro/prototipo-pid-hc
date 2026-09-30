@@ -1,0 +1,153 @@
+<header class="page-header">
+  <div class="page-header__heading">
+    <h1>Tecnovigilância</h1>
+    <span aria-hidden="true">-</span>
+    <p>Consulte o histórico das notificações</p>
+  </div>
+</header>
+
+<div class="toolbar">
+  <label class="search">
+    <span class="visually-hidden">Pesquisa livre</span>
+    <img src="icons/search.svg" alt="" width="16" height="16" />
+    <input
+      type="search"
+      name="tecnovigilanciaSearch"
+      placeholder="Pesquisar por código, produto ou descrição"
+      autocomplete="off"
+      [(ngModel)]="searchTerm"
+    />
+  </label>
+
+  <div class="toolbar__actions">
+    <button
+      class="toolbar__filter"
+      type="button"
+      aria-label="Abrir filtros"
+      aria-controls="tecnovigilancia-filters"
+      [attr.aria-expanded]="filtersOpen()"
+      (click)="openFilters()"
+    >
+      <img src="icons/filter.svg" alt="" width="16" height="16" />
+      <span>Filtrar</span>
+      @if (activeFilters > 0) {
+        <span class="toolbar__filter-count">{{ activeFilters }}</span>
+      }
+    </button>
+
+    <button class="toolbar__create" type="button">
+      <span class="toolbar__create-icon" aria-hidden="true">+</span>
+      <span>Criar notificação</span>
+    </button>
+  </div>
+</div>
+
+<section class="records-table" aria-labelledby="records-table-title">
+  <h2 id="records-table-title" class="visually-hidden">Histórico de tecnovigilância</h2>
+
+  <div class="records-table__scroll">
+    <table>
+      <caption class="visually-hidden">
+        Notificações de tecnovigilância com produto, fabricante e descrição do evento.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Data</th>
+          <th scope="col">Produto</th>
+          <th scope="col">Marca</th>
+          <th scope="col">Fabricante</th>
+          <th scope="col">Descrição</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (record of rows(); track record.codigo) {
+          <tr>
+            <td class="records-table__code">{{ record.codigo }}</td>
+            <td class="records-table__date">{{ record.data }}</td>
+            <td class="records-table__product">{{ record.produto }}</td>
+            <td>{{ record.marca }}</td>
+            <td>{{ record.fabricante }}</td>
+            <td class="records-table__description">{{ record.descricao }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td class="records-table__empty" colspan="6">
+              Nenhuma notificação encontrada com os filtros informados.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="records-table__footer">
+    <span>
+      {{ rows().length }}
+      {{ rows().length === 1 ? 'notificação encontrada' : 'notificações encontradas' }}
+    </span>
+
+    <nav class="records-table__pagination" aria-label="Paginação da tabela">
+      <button type="button" disabled aria-label="Página anterior">&lsaquo;</button>
+      <button class="records-table__page--active" type="button" aria-current="page">1</button>
+      <button type="button" disabled aria-label="Próxima página">&rsaquo;</button>
+    </nav>
+  </footer>
+</section>
+
+<button
+  class="filter-backdrop"
+  type="button"
+  tabindex="-1"
+  aria-label="Fechar filtros"
+  [class.filter-backdrop--visible]="filtersOpen()"
+  (click)="closeFilters()"
+></button>
+
+<aside
+  id="tecnovigilancia-filters"
+  class="filters-panel"
+  [class.filters-panel--open]="filtersOpen()"
+  [attr.aria-hidden]="filtersOpen() ? null : 'true'"
+  [attr.inert]="filtersOpen() ? null : ''"
+  aria-label="Filtros de tecnovigilância"
+>
+  <header class="filters-panel__header">
+    <div>
+      <h2>Filtros</h2>
+      <p>Refine as notificações exibidas</p>
+    </div>
+    <button type="button" aria-label="Fechar filtros" (click)="closeFilters()">&times;</button>
+  </header>
+
+  <form class="filters-panel__form" (ngSubmit)="applyFilters()">
+    <label>
+      <span>Marca</span>
+      <select name="brand" [(ngModel)]="brand">
+        <option value="">Todas as marcas</option>
+        <option value="Infusomat">Infusomat</option>
+        <option value="BeneVision">BeneVision</option>
+        <option value="Arrow">Arrow</option>
+        <option value="Servo-air">Servo-air</option>
+        <option value="Descarpack">Descarpack</option>
+      </select>
+    </label>
+
+    <label>
+      <span>Fabricante</span>
+      <select name="manufacturer" [(ngModel)]="manufacturer">
+        <option value="">Todos os fabricantes</option>
+        <option value="B. Braun">B. Braun</option>
+        <option value="Mindray">Mindray</option>
+        <option value="Teleflex">Teleflex</option>
+        <option value="Getinge">Getinge</option>
+        <option value="Descarpack">Descarpack</option>
+      </select>
+    </label>
+
+    <div class="filters-panel__footer">
+      <button class="filters-panel__clear" type="button" (click)="clearFilters()">Limpar</button>
+      <button class="filters-panel__apply" type="submit">Aplicar filtros</button>
+    </div>
+  </form>
+</aside>

@@ -1,0 +1,83 @@
+<section class="materials-table" aria-labelledby="materials-table-title">
+  <h2 id="materials-table-title" class="visually-hidden">Histórico dos materiais</h2>
+
+  <div class="materials-table__scroll">
+    <table>
+      <caption class="visually-hidden">
+        Materiais avaliados, seus dados de identificação, status e parecer.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Fabricante</th>
+          <th scope="col">Marca</th>
+          <th scope="col">Data</th>
+          <th scope="col">Local</th>
+          <th scope="col">Status</th>
+          <th scope="col">Parecer</th>
+          <th scope="col"><span>Ações</span></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (material of rows(); track material.id) {
+          <tr>
+            <td class="materials-table__code">{{ material.codigo }}</td>
+            <td class="materials-table__description">{{ material.descricao }}</td>
+            <td>{{ material.fabricante }}</td>
+            <td>{{ material.marca }}</td>
+            <td class="materials-table__date">{{ formatDate(material.data) }}</td>
+            <td>{{ material.local }}</td>
+            <td>
+              <span
+                class="materials-table__status"
+                [class.materials-table__status--approved]="material.status === 'aprovado'"
+                [class.materials-table__status--rejected]="material.status === 'reprovado'"
+              >
+                {{ material.status === 'aprovado' ? 'Aprovado' : 'Reprovado' }}
+              </span>
+            </td>
+            <td class="materials-table__opinion">{{ material.parecer }}</td>
+            <td class="materials-table__actions">
+              <button
+                class="materials-table__action materials-table__action--edit"
+                type="button"
+                [attr.aria-label]="'Editar ' + material.codigo"
+                (click)="editMaterial.emit(material)"
+              >
+                Editar
+              </button>
+              <button
+                class="materials-table__action materials-table__action--delete"
+                type="button"
+                [attr.aria-label]="'Excluir ' + material.codigo"
+                (click)="deleteMaterial.emit(material)"
+              >
+                Excluir
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td class="materials-table__empty" colspan="9">
+              {{ loading() ? 'Carregando materiais...' : 'Nenhum material encontrado com os filtros informados.' }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="materials-table__footer">
+    <span>
+      {{ rows().length }} {{ rows().length === 1 ? 'material encontrado' : 'materiais encontrados' }}
+    </span>
+
+    <nav class="materials-table__pagination" aria-label="Paginação da tabela">
+      <button type="button" disabled aria-label="Página anterior">&lsaquo;</button>
+      <button class="materials-table__page--active" type="button" aria-current="page">1</button>
+      <button type="button" disabled aria-label="Próxima página">&rsaquo;</button>
+    </nav>
+  </footer>
+</section>

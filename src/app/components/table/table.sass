@@ -1,0 +1,189 @@
+:host
+  display: block
+  width: 100%
+  min-width: 0
+  max-width: 100%
+
+.materials-table
+  width: 100%
+  min-width: 0
+  max-width: 100%
+  overflow: hidden
+  background-color: #fff
+  border: 1px solid #e4e7ec
+  border-radius: 10px
+  box-shadow: 0 1px 2px rgb(16 24 40 / 4%)
+
+.materials-table__scroll
+  width: 100%
+  overflow-x: auto
+
+table
+  width: 100%
+  min-width: 1120px
+  border-collapse: collapse
+  color: #344054
+  font-size: 13px
+
+th,
+td
+  padding: 12px 14px
+  text-align: left
+  vertical-align: middle
+  border-right: 1px solid #eaecf0
+  border-bottom: 1px solid #eaecf0
+
+  &:last-child
+    border-right: 0
+
+th
+  height: 44px
+  color: #667085
+  background-color: #f8f9fc
+  font-size: 12px
+  font-weight: 600
+  letter-spacing: .01em
+  white-space: nowrap
+
+tbody tr
+  transition: background-color 140ms ease
+
+  &:hover
+    background-color: #f9faff
+
+  &:last-child td
+    border-bottom: 0
+
+.materials-table__code,
+.materials-table__date
+  white-space: nowrap
+
+.materials-table__code
+  color: #1d2939
+  font-weight: 600
+
+.materials-table__description
+  min-width: 230px
+  color: #1d2939
+
+.materials-table__opinion
+  min-width: 280px
+  line-height: 1.45
+
+.materials-table__actions
+  display: flex
+  gap: 6px
+  min-width: 142px
+  min-height: 65px
+
+.materials-table__action
+  padding: 5px 8px
+  background-color: #fff
+  border: 1px solid #d0d5dd
+  border-radius: 6px
+  font-size: 11px
+  font-weight: 600
+  cursor: pointer
+
+  &--edit
+    color: #3346c4
+
+    &:hover,
+    &:focus-visible
+      background-color: #f2f4ff
+      border-color: #aeb6ec
+
+  &--delete
+    color: #b42318
+
+    &:hover,
+    &:focus-visible
+      background-color: #fef3f2
+      border-color: #fecdca
+
+.materials-table__status
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  min-height: 24px
+  padding: 3px 9px
+  border-radius: 999px
+  font-size: 11px
+  font-weight: 600
+  white-space: nowrap
+
+.materials-table__status--approved
+  color: #067647
+  background-color: #ecfdf3
+  border: 1px solid #abefc6
+
+.materials-table__status--rejected
+  color: #b42318
+  background-color: #fef3f2
+  border: 1px solid #fecdca
+
+.materials-table__empty
+  height: 112px
+  color: #667085
+  text-align: center
+
+.materials-table__footer
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 16px
+  min-height: 56px
+  padding: 10px 14px
+  color: #667085
+  border-top: 1px solid #e4e7ec
+  font-size: 12px
+
+.materials-table__pagination
+  display: flex
+  align-items: center
+  gap: 6px
+
+  button
+    display: grid
+    place-items: center
+    width: 32px
+    height: 32px
+    padding: 0
+    color: #475467
+    background-color: #fff
+    border: 1px solid #d0d5dd
+    border-radius: 7px
+    cursor: pointer
+
+    &:disabled
+      color: #d0d5dd
+      background-color: #f9fafb
+      cursor: not-allowed
+
+  .materials-table__page--active
+    color: #fff
+    background-color: #3346c4
+    border-color: #3346c4
+
+.visually-hidden
+  position: absolute
+  width: 1px
+  height: 1px
+  padding: 0
+  margin: -1px
+  overflow: hidden
+  clip: rect(0, 0, 0, 0)
+  white-space: nowrap
+  border: 0
+
+@media (max-width: 575.98px)
+  .materials-table
+    border-radius: 8px
+
+  .materials-table__footer
+    align-items: flex-start
+    flex-direction: column
+
+@media (prefers-reduced-motion: reduce)
+  tbody tr
+    transition: none

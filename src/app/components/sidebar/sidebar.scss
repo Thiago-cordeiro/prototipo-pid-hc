@@ -1,0 +1,362 @@
+:host {
+  display: contents;
+}
+
+.mobile-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 64px;
+  padding: 10px 16px;
+  background-color: rgb(255 255 255 / 96%);
+  border-bottom: 1px solid #e4e7ec;
+  backdrop-filter: blur(10px);
+
+  &__brand {
+    color: #1d2939;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  &__menu-button {
+    display: inline-grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    color: #344054;
+    background-color: #fff;
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: #1e2d9b;
+      background-color: #f2f4ff;
+      border-color: #aeb6ec;
+    }
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 1.8;
+  }
+}
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
+  width: 100vw;
+  max-width: 100vw;
+  color: #202735;
+  background-color: #f8f9fc;
+  border-right: 1px solid #e4e7ec;
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition:
+    transform 220ms ease,
+    visibility 220ms;
+
+  &--open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  &__mobile-header {
+    display: flex;
+    align-items: center;
+    min-height: 72px;
+    padding: 12px 18px;
+    border-bottom: 1px solid #e4e7ec;
+  }
+
+  &__mobile-title {
+    flex: 1;
+    margin: 0 0 0 10px;
+    color: #1d2939;
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &__close {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    color: #475467;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: #1e2d9b;
+      background-color: #eef0ff;
+    }
+
+    svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-width: 1.8;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh - 72px);
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  &__header {
+    display: none;
+    align-items: center;
+    min-height: 76px;
+    padding: 12px 18px;
+    border-bottom: 1px solid #e4e7ec;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #1d2939;
+    font-family: 'Outfit', sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      color: #1e2d9b;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 22px 14px;
+  }
+
+  &__section-title {
+    margin: 0 10px 4px;
+    color: #667085;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 8px 12px;
+    color: #344054;
+    background-color: #fff;
+    border: 1px solid #e4e7ec;
+    border-radius: 6px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition:
+      color 150ms ease,
+      background-color 150ms ease,
+      border-color 150ms ease;
+
+    &:hover,
+    &:focus-visible,
+    &--active {
+      color: #1e2d9b;
+      background-color: #f2f4ff;
+      border-color: #c7cdf5;
+    }
+
+    svg {
+      flex: 0 0 18px;
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1;
+    }
+  }
+
+  &__footer {
+    margin-top: auto;
+    padding: 14px;
+    border-top: 1px solid #e4e7ec;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    margin-bottom: 10px;
+    padding: 4px;
+  }
+
+  &__avatar {
+    display: inline-grid;
+    flex: 0 0 40px;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    color: #3346c4;
+    background-color: #e7eaff;
+    border-radius: 50%;
+
+    svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.5;
+    }
+  }
+
+  &__user-data {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+
+    strong,
+    small {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    strong {
+      color: #1d2939;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    small {
+      color: #667085;
+      font-size: 12px;
+      text-transform: lowercase;
+    }
+  }
+
+  &__logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 42px;
+    color: #475467;
+    background-color: #fff;
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: #fff;
+      background-color: #b42318;
+      border-color: #b42318;
+    }
+
+    &:active {
+      background-color: #7f1d1d;
+      border-color: #7f1d1d;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.5;
+    }
+  }
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background-color: rgb(16 24 40 / 38%);
+  border: 0;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  transition:
+    opacity 220ms ease,
+    visibility 220ms;
+
+  &--visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (min-width: 992px) {
+  .mobile-header,
+  .sidebar__mobile-header,
+  .sidebar-backdrop {
+    display: none;
+  }
+
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 10;
+    width: 288px;
+    height: 100dvh;
+    max-width: none;
+    transform: none;
+    visibility: visible;
+
+    &__body {
+      height: 100dvh;
+    }
+
+    &__header {
+      display: flex;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-backdrop,
+  .sidebar__link {
+    transition: none;
+  }
+}

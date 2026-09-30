@@ -2,15 +2,37 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
 
-## Development server
+## Executando o protótipo
 
-To start a local development server, run:
+Instale as dependências:
 
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Inicie o Angular:
+
+```bash
+npm start
+```
+
+A aplicação ficará disponível em `http://localhost:4200/`. As inclusões, edições e
+exclusões feitas na tela de Materiais são persistidas automaticamente no `localStorage`
+do navegador, sem API ou servidor de dados adicional.
+
+Para retornar à carga inicial, limpe os dados do site no navegador ou remova a chave
+`pid-hc.materials.v1` do `localStorage`.
+
+## Exportando para teste
+
+Gere os arquivos estáticos com:
+
+```bash
+npm run build
+```
+
+O resultado ficará em `dist/prototipo-pid/browser`. O CRUD continuará funcionando no
+navegador porque não depende de backend.
 
 ## Code scaffolding
 
