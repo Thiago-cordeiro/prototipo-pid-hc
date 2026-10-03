@@ -1,0 +1,324 @@
+<header class="materials-header">
+  <div class="materials-header__heading">
+    <h1 class="materials-header__title">Histórico de materiais</h1>
+    <span class="materials-header__separator" aria-hidden="true">-</span>
+    <p class="materials-header__description">Consulte as marcas já analisadas</p>
+  </div>
+</header>
+
+<div class="materials-toolbar">
+  <label class="materials-search">
+    <span class="visually-hidden">Pesquisa livre</span>
+    <img src="icons/search.svg" alt="" width="16" height="16" />
+    <input
+      type="search"
+      name="materialSearch"
+      placeholder="Pesquisar material, marca ou fabricante"
+      autocomplete="off"
+      [(ngModel)]="searchTerm"
+    />
+  </label>
+
+  <div class="materials-toolbar__actions">
+    <button
+      class="materials-toolbar__filter"
+      type="button"
+      aria-label="Abrir filtros"
+      aria-controls="materials-filters"
+      [attr.aria-expanded]="filtersOpen()"
+      (click)="openFilters()"
+    >
+      <img src="icons/filter.svg" alt="" width="16" height="16" />
+      <span>Filtrar</span>
+      @if (activeFilters > 0) {
+        <span class="materials-toolbar__filter-count">{{ activeFilters }}</span>
+      }
+    </button>
+
+    <button class="materials-toolbar__create" type="button" (click)="createMaterial()">
+      <span class="materials-toolbar__create-icon" aria-hidden="true">+</span>
+      <span>Novo material</span>
+    </button>
+  </div>
+</div>
+
+@if (errorMessage()) {
+  <div class="materials-feedback materials-feedback--error" role="alert">
+    <span>{{ errorMessage() }}</span>
+    @if (!editorOpen() && !deleteDialogOpen()) {
+      <button type="button" (click)="loadMaterials()">Tentar novamente</button>
+    }
+  </div>
+}
+
+@if (successMessage()) {
+  <div class="materials-feedback materials-feedback--success" role="status">
+    <span>{{ successMessage() }}</span>
+    <button type="button" aria-label="Fechar mensagem" (click)="successMessage.set('')">
+      &times;
+    </button>
+  </div>
+}
+
+<app-material-history-cards
+  [materials]="materials()"
+  [loading]="loading()"
+  [query]="searchTerm"
+  [manufacturer]="manufacturer"
+  [status]="status"
+  (addHistory)="createHistory($event)"
+  (editMaterial)="editMaterial($event)"
+  (deleteMaterial)="deleteMaterial($event)"
+/>
+
+<button
+  class="filter-backdrop"
+  type="button"
+  tabindex="-1"
+  aria-label="Fechar filtros"
+  [class.filter-backdrop--visible]="filtersOpen()"
+  (click)="closeFilters()"
+></button>
+
+<aside
+  id="materials-filters"
+  class="filters-panel"
+  [class.filters-panel--open]="filtersOpen()"
+  [attr.aria-hidden]="filtersOpen() ? null : 'true'"
+  [attr.inert]="filtersOpen() ? null : ''"
+  aria-label="Filtros de materiais"
+>
+  <header class="filters-panel__header">
+    <div>
+      <h2>Filtros</h2>
+      <p>Refine os materiais exibidos</p>
+    </div>
+
+    <button type="button" aria-label="Fechar filtros" (click)="closeFilters()">&times;</button>
+  </header>
+
+  <form class="filters-panel__form" (ngSubmit)="applyFilters()">
+    <label>
+      <span>Fabricante</span>
+      <select name="manufacturer" [(ngModel)]="manufacturer">
+        <option value="">Todos os fabricantes</option>
+        @for (item of manufacturers(); track item) {
+          <option [value]="item">{{ item }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Status</span>
+      <select name="status" [(ngModel)]="status">
+        <option value="">Todos os status</option>
+        <option value="aprovado">Aprovado</option>
+        <option value="reprovado">Reprovado</option>
+      </select>
+    </label>
+
+    <div class="filters-panel__footer">
+      <button class="filters-panel__clear" type="button" (click)="clearFilters()">Limpar</button>
+      <button class="filters-panel__apply" type="submit">Aplicar filtros</button>
+    </div>
+  </form>
+</aside>
+
+@if (editorOpen()) {
+  <div class="material-modal-layer">
+    <button
+      class="material-modal-backdrop"
+      type="button"
+      tabindex="-1"
+      aria-label="Fechar cadastro de material"
+      (click)="closeEditor()"
+    ></button>
+
+    <section
+      class="material-modal material-modal--editor"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="material-modal-title"
+      aria-describedby="material-modal-description"
+    >
+      <header class="material-modal__header">
+        <div>
+          <h2 id="material-modal-title">
+            {{
+              editingId()
+                ? 'Editar histórico'
+                : addingHistory()
+                  ? 'Novo histórico'
+                  : 'Novo material'
+            }}
+          </h2>
+          <p id="material-modal-description">
+            {{
+              addingHistory()
+                ? 'Cadastre a análise de uma nova marca para este material'
+                : 'Os dados serão salvos neste navegador'
+            }}
+          </p>
+        </div>
+        <button type="button" aria-label="Fechar cadastro de material" (click)="closeEditor()">
+          &times;
+        </button>
+      </header>
+
+      <form
+        class="material-modal__form"
+        #materialForm="ngForm"
+        (ngSubmit)="saveMaterial(materialForm)"
+      >
+        <div class="material-modal__grid">
+          <label>
+            <span>Código <em aria-hidden="true">*</em></span>
+            <input
+              name="codigo"
+              required
+              autocomplete="off"
+              [readonly]="addingHistory()"
+              [(ngModel)]="form.codigo"
+            />
+          </label>
+
+          <label>
+            <span>Data <em aria-hidden="true">*</em></span>
+            <input name="data" type="date" required [(ngModel)]="form.data" />
+          </label>
+
+          <label class="material-modal__wide">
+            <span>Nome <em aria-hidden="true">*</em></span>
+            <input
+              name="descricao"
+              required
+              autocomplete="off"
+              [readonly]="addingHistory()"
+              [(ngModel)]="form.descricao"
+            />
+          </label>
+
+          <label>
+            <span>Fabricante <em aria-hidden="true">*</em></span>
+            <input name="fabricante" required autocomplete="off" [(ngModel)]="form.fabricante" />
+          </label>
+
+          <label>
+            <span>Marca <em aria-hidden="true">*</em></span>
+            <input name="marca" required autocomplete="off" [(ngModel)]="form.marca" />
+          </label>
+
+          <label>
+            <span>Local <em aria-hidden="true">*</em></span>
+            <input
+              name="local"
+              required
+              autocomplete="off"
+              [readonly]="addingHistory()"
+              [(ngModel)]="form.local"
+            />
+          </label>
+
+          <label>
+            <span>Status <em aria-hidden="true">*</em></span>
+            <select name="materialStatus" required [(ngModel)]="form.status">
+              <option value="aprovado">Aprovado</option>
+              <option value="reprovado">Reprovado</option>
+            </select>
+          </label>
+
+          <label class="material-modal__wide">
+            <span>Parecer <em aria-hidden="true">*</em></span>
+            <textarea name="parecer" rows="4" required [(ngModel)]="form.parecer"></textarea>
+          </label>
+
+          @if (errorMessage()) {
+            <div class="material-modal__error material-modal__wide" role="alert">
+              {{ errorMessage() }}
+            </div>
+          }
+        </div>
+
+        <footer class="material-modal__footer">
+          <button
+            class="material-modal__cancel"
+            type="button"
+            [disabled]="saving()"
+            (click)="closeEditor()"
+          >
+            Cancelar
+          </button>
+          <button class="material-modal__save" type="submit" [disabled]="saving()">
+            {{
+              saving()
+                ? 'Salvando...'
+                : editingId()
+                  ? 'Salvar alterações'
+                  : addingHistory()
+                    ? 'Adicionar histórico'
+                    : 'Criar material'
+            }}
+          </button>
+        </footer>
+      </form>
+    </section>
+  </div>
+}
+
+@if (deleteDialogOpen() && materialPendingDeletion(); as material) {
+  <div class="material-modal-layer material-modal-layer--delete">
+    <button
+      class="material-modal-backdrop"
+      type="button"
+      tabindex="-1"
+      aria-label="Cancelar exclusão"
+      (click)="closeDeleteDialog()"
+    ></button>
+
+    <section
+      class="material-modal material-modal--delete"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="delete-material-title"
+      aria-describedby="delete-material-description"
+    >
+      <header class="material-modal__header">
+        <div>
+          <h2 id="delete-material-title">Excluir histórico</h2>
+          <p>Esta ação não poderá ser desfeita</p>
+        </div>
+        <button type="button" aria-label="Cancelar exclusão" (click)="closeDeleteDialog()">
+          &times;
+        </button>
+      </header>
+
+      <div class="material-modal__delete-content">
+        <span class="material-modal__warning-icon" aria-hidden="true">!</span>
+        <p id="delete-material-description">
+          Deseja excluir a análise da marca <strong>{{ material.marca }}</strong> do material
+          <strong>{{ material.codigo }}</strong
+          >?
+        </p>
+      </div>
+
+      <footer class="material-modal__footer">
+        <button
+          class="material-modal__cancel"
+          type="button"
+          [disabled]="deleting()"
+          (click)="closeDeleteDialog()"
+        >
+          Cancelar
+        </button>
+        <button
+          class="material-modal__delete"
+          type="button"
+          [disabled]="deleting()"
+          (click)="confirmDeleteMaterial()"
+        >
+          {{ deleting() ? 'Excluindo...' : 'Excluir histórico' }}
+        </button>
+      </footer>
+    </section>
+  </div>
+}

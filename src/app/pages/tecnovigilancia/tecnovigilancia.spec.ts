@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { Tecnovigilancia } from './tecnovigilancia';
 
@@ -9,6 +10,7 @@ describe('Tecnovigilancia', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Tecnovigilancia],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Tecnovigilancia);
@@ -25,14 +27,7 @@ describe('Tecnovigilancia', () => {
       fixture.nativeElement.querySelectorAll('thead th') as NodeListOf<HTMLElement>,
     ).map((column) => column.textContent?.trim());
 
-    expect(columns).toEqual([
-      'Código',
-      'Data',
-      'Produto',
-      'Marca',
-      'Fabricante',
-      'Descrição',
-    ]);
+    expect(columns).toEqual(['Código', 'Data', 'Produto', 'Marca', 'Fabricante', 'Descrição']);
   });
 
   it('should filter records using the search field', () => {

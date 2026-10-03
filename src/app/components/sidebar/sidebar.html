@@ -1,8 +1,14 @@
 <header class="mobile-header">
   <a class="mobile-header__brand" routerLink="/" (click)="close()">PID-HC</a>
 
-  <button class="mobile-header__menu-button" type="button" aria-label="Abrir menu principal"
-    aria-controls="main-sidebar" [attr.aria-expanded]="isOpen()" (click)="open()">
+  <button
+    class="mobile-header__menu-button"
+    type="button"
+    aria-label="Abrir menu principal"
+    aria-controls="main-sidebar"
+    [attr.aria-expanded]="isOpen()"
+    (click)="open()"
+  >
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M4 6h16M4 12h16M4 18h16" />
     </svg>
@@ -28,13 +34,31 @@
     <nav class="sidebar__nav" aria-label="Menu principal">
       <span class="sidebar__section-title">Menu</span>
 
-      <a class="sidebar__link" routerLink="/materiais" routerLinkActive="sidebar__link--active" (click)="close()">
+      <a
+        class="sidebar__link"
+        routerLink="/materiais"
+        routerLinkActive="sidebar__link--active"
+        (click)="close()"
+      >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M11 13v4M15 5v4M3 3v16a2 2 0 0 0 2 2h16" />
           <rect x="7" y="13" width="9" height="4" rx="1" />
           <rect x="7" y="5" width="12" height="4" rx="1" />
         </svg>
         <span>Materiais</span>
+      </a>
+
+      <a
+        class="sidebar__link"
+        routerLink="/historico-materiais"
+        routerLinkActive="sidebar__link--active"
+        (click)="close()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+          <path d="M3 3v5h5M12 7v5l3 2" />
+        </svg>
+        <span>Histórico de materiais</span>
       </a>
 
       <a
@@ -47,7 +71,8 @@
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
           <path
-            d="M3 10a2 2 0 0 1 .71-1.53l7-6a2 2 0 0 1 2.58 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            d="M3 10a2 2 0 0 1 .71-1.53l7-6a2 2 0 0 1 2.58 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+          />
         </svg>
         <span>Tecnovigilância</span>
       </a>
@@ -66,8 +91,6 @@
         <span>Importar planilha</span>
       </a>
     </nav>
-
-
 
     <footer class="sidebar__footer">
       <div class="sidebar__user">
@@ -95,5 +118,11 @@
   </div>
 </aside>
 
-<button class="sidebar-backdrop" type="button" tabindex="-1" aria-label="Fechar menu"
-  [class.sidebar-backdrop--visible]="isOpen()" (click)="close()"></button>
+<button
+  class="sidebar-backdrop"
+  type="button"
+  tabindex="-1"
+  aria-label="Fechar menu"
+  [class.sidebar-backdrop--visible]="isOpen()"
+  (click)="close()"
+></button>

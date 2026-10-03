@@ -1,0 +1,417 @@
+:host
+  display: block
+  width: 100%
+  min-width: 0
+
+.material-history__list
+  display: grid
+  gap: 16px
+
+.material-card
+  overflow: hidden
+  color: #101828
+  background-color: #fff
+  border: 1px solid #d1d5dc
+  border-radius: 16px
+  box-shadow: 0 1px 2px rgb(0 0 0 / 4%)
+
+.material-card__header
+  padding: 22px 24px 18px
+  background-color: #f9fafb
+  border-bottom: 1px solid #e4e7ec
+
+.material-card__title-row
+  display: flex
+  align-items: flex-start
+  justify-content: space-between
+  gap: 20px
+
+.material-card__heading
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  gap: 10px 12px
+  min-width: 0
+
+  h3
+    margin: 0
+    color: #101828
+    font-size: 20px
+    font-weight: 600
+    line-height: 1.2
+
+.material-card__code
+  display: inline-flex
+  align-items: center
+  gap: 5px
+  min-height: 26px
+  padding: 3px 9px
+  color: #667085
+  background-color: #fff
+  border: 1px solid #d1d5dc
+  border-radius: 999px
+  font-size: 12px
+  font-weight: 500
+  white-space: nowrap
+
+  svg
+    width: 15px
+    height: 15px
+    fill: none
+    stroke: currentColor
+    stroke-linecap: round
+    stroke-linejoin: round
+    stroke-width: 1.5
+
+.material-card__add
+  display: inline-flex
+  flex: 0 0 auto
+  align-items: center
+  justify-content: center
+  gap: 6px
+  height: 36px
+  padding: 0 12px
+  color: #fff
+  background-color: #3346c4
+  border: 1px solid #3346c4
+  border-radius: 8px
+  box-shadow: 0 1px 2px rgb(0 0 0 / 5%)
+  font-size: 13px
+  font-weight: 600
+  cursor: pointer
+
+  span
+    font-size: 20px
+    font-weight: 400
+    line-height: 1
+
+  &:hover,
+  &:focus-visible
+    background-color: #1e2d9b
+    border-color: #1e2d9b
+
+.material-card__meta
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  gap: 8px
+  margin-top: 12px
+  color: #667085
+  font-size: 13px
+
+  span
+    display: inline-flex
+    align-items: center
+    gap: 5px
+
+  strong
+    font-weight: 600
+
+  svg
+    width: 18px
+    height: 18px
+    fill: none
+    stroke: currentColor
+    stroke-linecap: round
+    stroke-linejoin: round
+    stroke-width: 1.5
+
+  i
+    width: 1px
+    height: 18px
+    background-color: #d1d5dc
+
+.material-card__body
+  padding: 20px 24px 24px
+
+.material-card__section-title
+  display: flex
+  align-items: baseline
+  justify-content: space-between
+  gap: 16px
+  margin-bottom: 12px
+
+  h4,
+  span
+    margin: 0
+
+  h4
+    color: #344054
+    font-family: 'Poppins', sans-serif
+    font-size: 14px
+    font-weight: 600
+
+  span
+    color: #98a2b3
+    font-size: 11px
+
+.material-card__histories
+  display: grid
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 12px
+
+.history-entry
+  display: flex
+  min-width: 0
+  flex-direction: column
+  padding: 16px
+  background-color: #fff
+  border: 1px solid #e4e7ec
+  border-radius: 12px
+
+.history-entry__header
+  display: flex
+  align-items: flex-start
+  justify-content: space-between
+  gap: 12px
+  margin-bottom: 14px
+
+  h5
+    margin: 2px 0 0
+    color: #101828
+    font-family: 'Outfit', sans-serif
+    font-size: 16px
+    font-weight: 600
+    line-height: 1.25
+
+.history-entry__eyebrow
+  color: #98a2b3
+  font-size: 10px
+  font-weight: 600
+  letter-spacing: .05em
+  text-transform: uppercase
+
+.history-entry__status
+  display: inline-flex
+  flex: 0 0 auto
+  align-items: center
+  gap: 6px
+  min-height: 24px
+  padding: 3px 9px
+  border: 1px solid
+  border-radius: 999px
+  font-size: 11px
+  font-weight: 600
+
+  > span
+    width: 6px
+    height: 6px
+    border-radius: 50%
+
+  &--approved
+    color: #067647
+    background-color: #ecfdf3
+    border-color: #abefc6
+
+    > span
+      background-color: #17b26a
+
+  &--rejected
+    color: #b42318
+    background-color: #fef3f2
+    border-color: #fecdca
+
+    > span
+      background-color: #f04438
+
+.history-entry__details
+  display: grid
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 8px 16px
+  margin: 0 0 14px
+
+  div
+    min-width: 0
+
+  dt
+    margin-bottom: 2px
+    color: #98a2b3
+    font-size: 10px
+    font-weight: 600
+    letter-spacing: .03em
+    text-transform: uppercase
+
+  dd
+    overflow: hidden
+    margin: 0
+    color: #475467
+    font-size: 12px
+    font-weight: 500
+    text-overflow: ellipsis
+    white-space: nowrap
+
+.history-entry__opinion
+  display: flex
+  flex: 1
+  align-items: flex-start
+  gap: 9px
+  min-height: 92px
+  padding: 13px
+  border-radius: 10px
+
+  svg
+    flex: 0 0 19px
+    width: 19px
+    height: 19px
+    fill: none
+    stroke: currentColor
+    stroke-linecap: round
+    stroke-linejoin: round
+    stroke-width: 1.6
+
+  strong
+    display: block
+    margin-bottom: 4px
+    font-size: 12px
+    font-weight: 600
+
+  p
+    margin: 0
+    color: #475467
+    font-size: 12px
+    line-height: 1.5
+
+  &--approved
+    color: #067647
+    background-color: #dcfae6
+
+  &--rejected
+    color: #b42318
+    background-color: #fee4e2
+
+.history-entry__actions
+  display: flex
+  justify-content: flex-end
+  gap: 6px
+  margin-top: 12px
+
+  button
+    min-height: 30px
+    padding: 0 9px
+    color: #3346c4
+    background-color: #fff
+    border: 1px solid #d0d5dd
+    border-radius: 7px
+    font-size: 11px
+    font-weight: 600
+    cursor: pointer
+
+    &:hover,
+    &:focus-visible
+      background-color: #f2f4ff
+      border-color: #aeb6ec
+
+  .history-entry__delete
+    color: #b42318
+
+    &:hover,
+    &:focus-visible
+      background-color: #fef3f2
+      border-color: #fecdca
+
+.material-history__empty
+  display: flex
+  min-height: 290px
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  padding: 32px
+  color: #667085
+  background-color: #fff
+  border: 1px dashed #d0d5dd
+  border-radius: 16px
+  text-align: center
+
+  > span
+    display: grid
+    place-items: center
+    width: 48px
+    height: 48px
+    margin-bottom: 12px
+    color: #475467
+    background-color: #f2f4f7
+    border-radius: 50%
+
+  svg
+    width: 24px
+    height: 24px
+    fill: none
+    stroke: currentColor
+    stroke-linecap: round
+    stroke-linejoin: round
+    stroke-width: 1.5
+
+  h3
+    margin: 0
+    color: #344054
+    font-size: 16px
+
+  p
+    margin: 5px 0 0
+    font-size: 13px
+
+.material-history__footer
+  display: flex
+  justify-content: space-between
+  gap: 16px
+  padding: 14px 4px 2px
+  color: #667085
+  font-size: 12px
+
+.visually-hidden
+  position: absolute
+  width: 1px
+  height: 1px
+  padding: 0
+  margin: -1px
+  overflow: hidden
+  clip: rect(0, 0, 0, 0)
+  white-space: nowrap
+  border: 0
+
+@media (max-width: 1100px)
+  .material-card__histories
+    grid-template-columns: 1fr
+
+@media (max-width: 575.98px)
+  .material-card
+    border-radius: 12px
+
+  .material-card__header,
+  .material-card__body
+    padding: 18px 16px
+
+  .material-card__title-row
+    flex-direction: column
+    gap: 14px
+
+  .material-card__heading h3
+    width: 100%
+    font-size: 18px
+
+  .material-card__add
+    width: 100%
+
+  .material-card__meta
+    align-items: flex-start
+    flex-direction: column
+
+    i
+      display: none
+
+  .material-card__section-title
+    align-items: flex-start
+    flex-direction: column
+    gap: 2px
+
+  .history-entry__header
+    flex-direction: column
+
+  .history-entry__details
+    grid-template-columns: 1fr
+
+  .material-history__footer
+    align-items: flex-start
+    flex-direction: column
+    gap: 3px
+

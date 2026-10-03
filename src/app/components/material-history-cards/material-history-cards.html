@@ -1,0 +1,149 @@
+<section class="material-history" aria-labelledby="materials-history-title">
+  <h2 id="materials-history-title" class="visually-hidden">Histórico de análises por material</h2>
+
+  <div class="material-history__list">
+    @for (group of groups(); track group.codigo) {
+      <article class="material-card">
+        <header class="material-card__header">
+          <div class="material-card__title-row">
+            <div class="material-card__heading">
+              <h3>{{ group.descricao }}</h3>
+              <span class="material-card__code">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M7.25 3 5.5 17M14.5 3l-1.75 14M3 7.25h14M2.5 12.75h14" />
+                </svg>
+                {{ group.codigo }}
+              </span>
+            </div>
+
+            <button
+              class="material-card__add"
+              type="button"
+              [attr.aria-label]="'Adicionar novo histórico para ' + group.descricao"
+              (click)="addHistory.emit(group.histories[0])"
+            >
+              <span aria-hidden="true">+</span>
+              Novo histórico
+            </button>
+          </div>
+
+          <div class="material-card__meta">
+            <span>
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M16 8.25c0 4.75-6 8.5-6 8.5s-6-3.75-6-8.5a6 6 0 1 1 12 0Z" />
+                <circle cx="10" cy="8" r="2" />
+              </svg>
+              <strong>Local:</strong> {{ group.local }}
+            </span>
+            <i aria-hidden="true"></i>
+            <span>
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M3 5.5h14v11H3zM6 3v4M14 3v4M3 9h14" />
+              </svg>
+              {{ group.histories.length }}
+              {{ group.histories.length === 1 ? 'marca analisada' : 'marcas analisadas' }}
+            </span>
+          </div>
+        </header>
+
+        <div class="material-card__body">
+          <div class="material-card__section-title">
+            <h4>Histórico de marcas</h4>
+            <span>Da análise mais recente para a mais antiga</span>
+          </div>
+
+          <div class="material-card__histories">
+            @for (history of group.histories; track history.id) {
+              <article class="history-entry">
+                <header class="history-entry__header">
+                  <div>
+                    <span class="history-entry__eyebrow">Marca analisada</span>
+                    <h5>{{ history.marca }}</h5>
+                  </div>
+
+                  <span
+                    class="history-entry__status"
+                    [class.history-entry__status--approved]="history.status === 'aprovado'"
+                    [class.history-entry__status--rejected]="history.status === 'reprovado'"
+                  >
+                    <span aria-hidden="true"></span>
+                    {{ history.status === 'aprovado' ? 'Aprovado' : 'Reprovado' }}
+                  </span>
+                </header>
+
+                <dl class="history-entry__details">
+                  <div>
+                    <dt>Fabricante</dt>
+                    <dd>{{ history.fabricante }}</dd>
+                  </div>
+                  <div>
+                    <dt>Data da análise</dt>
+                    <dd>{{ formatDate(history.data) }}</dd>
+                  </div>
+                </dl>
+
+                <div
+                  class="history-entry__opinion"
+                  [class.history-entry__opinion--approved]="history.status === 'aprovado'"
+                  [class.history-entry__opinion--rejected]="history.status === 'reprovado'"
+                >
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    @if (history.status === 'aprovado') {
+                      <circle cx="10" cy="10" r="7.5" />
+                      <path d="m6.5 10 2.2 2.2 4.8-5" />
+                    } @else {
+                      <circle cx="10" cy="10" r="7.5" />
+                      <path d="m7.25 7.25 5.5 5.5M12.75 7.25l-5.5 5.5" />
+                    }
+                  </svg>
+                  <div>
+                    <strong>Parecer da análise</strong>
+                    <p>{{ history.parecer }}</p>
+                  </div>
+                </div>
+
+                <footer class="history-entry__actions">
+                  <button
+                    type="button"
+                    [attr.aria-label]="'Editar histórico de ' + history.marca"
+                    (click)="editMaterial.emit(history)"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    class="history-entry__delete"
+                    type="button"
+                    [attr.aria-label]="'Excluir histórico de ' + history.marca"
+                    (click)="deleteMaterial.emit(history)"
+                  >
+                    Excluir
+                  </button>
+                </footer>
+              </article>
+            }
+          </div>
+        </div>
+      </article>
+    } @empty {
+      <div class="material-history__empty">
+        <span aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16v14H4zM8 3v6M16 3v6M8 13h8" /></svg>
+        </span>
+        <h3>{{ loading() ? 'Carregando históricos...' : 'Nenhum histórico encontrado' }}</h3>
+        @if (!loading()) {
+          <p>Tente alterar a pesquisa ou limpar os filtros aplicados.</p>
+        }
+      </div>
+    }
+  </div>
+
+  @if (!loading() && groups().length > 0) {
+    <footer class="material-history__footer">
+      <span>{{ groups().length }} {{ groups().length === 1 ? 'material' : 'materiais' }}</span>
+      <span>
+        {{ visibleHistoryCount() }}
+        {{ visibleHistoryCount() === 1 ? 'histórico exibido' : 'históricos exibidos' }}
+      </span>
+    </footer>
+  }
+</section>

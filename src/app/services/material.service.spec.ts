@@ -29,8 +29,8 @@ describe('MaterialService', () => {
   it('should initialize and list the local materials', async () => {
     const materials = await firstValueFrom(service.list());
 
-    expect(materials.length).toBe(2);
-    expect(globalThis.localStorage.getItem('pid-hc.materials.v1')).toBeTruthy();
+    expect(materials.length).toBe(6);
+    expect(globalThis.localStorage.getItem('pid-hc.materials.v2')).toBeTruthy();
   });
 
   it('should create and persist a material', async () => {
